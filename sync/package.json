@@ -1,0 +1,10 @@
+{
+  "name": "copito-sync",
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "@google-cloud/local-auth": "^3.0.1",
+    "googleapis": "^140.0.1",
+    "fs-extra": "^11.2.0"
+  }
+}

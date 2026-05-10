@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Copito • Siempre en Nuestro Corazón</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom, #fffdfb, #fff7ef);
+      color: #5d4c40;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(rgba(210,180,140,0.12) 2px, transparent 2px);
+      background-size: 40px 40px;
+      opacity: 0.35;
+      z-index: -2;
+    }
+
+    .container {
+      width: min(1300px, 92%);
+      margin: auto;
+    }
+
+    .floating-paws {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .paw {
+      position: absolute;
+      font-size: 28px;
+      opacity: 0.08;
+      animation: floatPaw linear infinite;
+    }
+
+    @keyframes floatPaw {
+      from {
+        transform: translateY(120vh) rotate(0deg);
+      }
+
+      to {
+        transform: translateY(-120vh) rotate(360deg);
+      }
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 1.2rem 0;
+      background: rgba(255,255,255,0.78);
+      backdrop-filter: blur(15px);
+      border-bottom: 1px solid rgba(210,180,140,0.18);
+      z-index: 1000;
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 1.5rem;
+      color: #8d7058;
+      font-weight: 700;
+      font-family: 'Quicksand', sans-serif;
+    }
+
+    nav {
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #7b6655;
+      font-weight: 500;
+      position: relative;
+      transition: 0.3s;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 0;
+      height: 2px;
+      background: #d2b48c;
+      transition: 0.3s;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 100px;
+      position: relative;
+    }
+
+    .hero-wrapper {
+      display: grid;
+      grid-template-columns: 420px 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .hero-image {
+      position: relative;
+    }
+
+    .hero-image::before {
+      content: '';
+      position: absolute;
+      inset: -20px;
+      background: linear-gradient(135deg, #fff5eb, #fff);
+      border-radius: 40px;
+      z-index: -1;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    }
+
+    .hero-image img {
+      width: 100%;
+      border-radius: 35px;
+      height: 560px;
+      object-fit: cover;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+    }
+
+    .hero-content h1 {
+      font-size: 6rem;
+      line-height: 1;
+      color: #8d7058;
+      font-family: 'Quicksand', sans-serif;
+      margin-bottom: 1rem;
+    }
+
+    .hero-content .dates {
+      color: #aa907b;
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+
+    .hero-content p {
+      line-height: 2;
+      color: #6d5b4e;
+      font-size: 1.08rem;
+      margin-bottom: 2rem;
+      max-width: 700px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 1rem 1.8rem;
+      border-radius: 999px;
+      text-decoration: none;
+      transition: 0.3s;
+      font-weight: 600;
+    }
+
+    .btn-primary {
+      background: #d2b48c;
+      color: white;
+      box-shadow: 0 10px 20px rgba(210,180,140,0.35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-4px);
+    }
+
+    .btn-secondary {
+      background: white;
+      color: #8d7058;
+      border: 1px solid rgba(210,180,140,0.35);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .stat-card {
+      background: rgba(255,255,255,0.7);
+      padding: 1.6rem;
+      border-radius: 24px;
+      text-align: center;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+    }
+
+    .stat-card h3 {
+      font-size: 2rem;
+      color: #8d7058;
+      margin-bottom: 0.5rem;
+    }
+
+    section {
+      padding: 7rem 0;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 3.2rem;
+      color: #8d7058;
+      margin-bottom: 1rem;
+      font-family: 'Quicksand', sans-serif;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      max-width: 750px;
+      margin: auto auto 4rem auto;
+      line-height: 1.9;
+      color: #8d7867;
+    }
+
+    .memories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px,1fr));
+      gap: 2rem;
+    }
+
+    .memory-card {
+      background: white;
+      border-radius: 35px;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.06);
+      transition: 0.4s;
+    }
+
+    .memory-card:hover {
+      transform: translateY(-10px);
+    }
+
+    .memory-card img {
+      width: 100%;
+      height: 330px;
+      object-fit: cover;
+    }
+
+    .memory-content {
+      padding: 2rem;
+    }
+
+    .memory-content h3 {
+      color: #8d7058;
+      margin-bottom: 1rem;
+      font-size: 1.4rem;
+    }
+
+    .memory-content p {
+      line-height: 1.8;
+      color: #6d5b4e;
+    }
+
+    .timeline {
+      max-width: 950px;
+      margin: auto;
+      position: relative;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      width: 3px;
+      height: 100%;
+      background: rgba(210,180,140,0.35);
+    }
+
+    .timeline-item {
+      width: 50%;
+      padding: 2rem;
+      position: relative;
+    }
+
+    .timeline-item:nth-child(odd) {
+      left: 0;
+      text-align: right;
+    }
+
+    .timeline-item:nth-child(even) {
+      left: 50%;
+    }
+
+    .timeline-box {
+      background: white;
+      padding: 2rem;
+      border-radius: 28px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    }
+
+    .timeline-box h3 {
+      color: #8d7058;
+      margin-bottom: 1rem;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
+      gap: 1.5rem;
+    }
+
+    .gallery .photo {
+      overflow: hidden;
+      border-radius: 30px;
+      aspect-ratio: 1/1;
+      position: relative;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: 0.5s;
+    }
+
+    .gallery .photo:hover img {
+      transform: scale(1.08);
+    }
+
+    .gallery .photo::after {
+      content: '🤍';
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.85);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ai-section {
+      background: linear-gradient(135deg, #fffaf5, #ffffff);
+      border-radius: 45px;
+      padding: 4rem;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+    }
+
+    .ai-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .ai-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 28px;
+      line-height: 1.9;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.04);
+    }
+
+    footer {
+      padding: 4rem 0;
+      text-align: center;
+      color: #9a8471;
+    }
+
+    @media(max-width: 1000px) {
+
+      .hero-wrapper {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-content {
+        text-align: center;
+      }
+
+      .hero-buttons {
+        justify-content: center;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline::before {
+        left: 20px;
+      }
+
+      .timeline-item {
+        width: 100%;
+        left: 0 !important;
+        text-align: left !important;
+        padding-left: 60px;
+      }
+
+    }
+
+    @media(max-width: 768px) {
+
+      header {
+        padding: 1rem 0;
+      }
+
+      .navbar {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+      }
+
+      .hero-content h1 {
+        font-size: 4rem;
+      }
+
+      .hero-image img {
+        height: 420px;
+      }
+
+      .section-title {
+        font-size: 2.4rem;
+      }
+
+      .ai-section {
+        padding: 2rem;
+      }
+
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="floating-paws" id="floatingPaws"></div>
+
+  <header>
+    <div class="container navbar">
+
+      <div class="logo">
+        🐾 Copito
+      </div>
+
+      <nav>
+        <a href="#inicio">Inicio</a>
+        <a href="#recuerdos">Recuerdos</a>
+        <a href="#vida">Su Vida</a>
+        <a href="#galeria">Galería</a>
+        <a href="#ia">IA Memories</a>
+      </nav>
+
+    </div>
+  </header>
+
+  <section class="hero" id="inicio">
+
+    <div class="container hero-wrapper">
+
+      <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?q=80&w=1200&auto=format&fit=crop" alt="Copito">
+      </div>
+
+      <div class="hero-content">
+
+        <h1>Copito</h1>
+
+        <div class="dates">
+          06 Octubre 2007 — 09 Mayo 2026
+        </div>
+
+        <p>
+          Gracias por acompañarnos durante 18 años llenos de amor, juegos,
+          compañía y recuerdos hermosos.
+          Esta página guarda parte de tu historia y todos los momentos
+          que siempre vivirán con nosotros.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="#galeria" class="btn btn-primary">Ver recuerdos</a>
+          <a href="#ia" class="btn btn-secondary">IA Memories ✨</a>
+        </div>
+
+        <div class="stats">
+
+          <div class="stat-card">
+            <h3>18</h3>
+            <span>Años juntos</span>
+          </div>
+
+          <div class="stat-card">
+            <h3>∞</h3>
+            <span>Recuerdos</span>
+          </div>
+
+          <div class="stat-card">
+            <h3>🐾</h3>
+            <span>Siempre familia</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <section id="recuerdos">
+
+    <div class="container">
+
+      <h2 class="section-title">Recuerdos Especiales</h2>
+
+      <div class="section-subtitle">
+        La inteligencia artificial organiza automáticamente las mejores fotos,
+        detecta recuerdos similares y genera pequeñas memorias de Copito.
+      </div>
+
+      <div class="memories-grid" id="memoryGrid"></div>
+
+    </div>
+
+  </section>
+
+  <section id="vida">
+
+    <div class="container">
+
+      <h2 class="section-title">La Vida de Copito</h2>
+
+      <div class="timeline">
+
+        <div class="timeline-item">
+          <div class="timeline-box">
+            <h3>2007 • El comienzo</h3>
+            <p>Llegaste pequeñito y rápidamente te convertiste en parte de la familia.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-box">
+            <h3>2012 • Aventuras</h3>
+            <p>Paseos, juegos y momentos felices llenaron cada año.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-box">
+            <h3>2018 • Compañía</h3>
+            <p>Siempre presente, incluso en los días más difíciles.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-box">
+            <h3>2026 • Gracias</h3>
+            <p>Gracias por todos los recuerdos y el amor incondicional.</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <section id="galeria">
+
+    <div class="container">
+
+      <h2 class="section-title">Galería Automática</h2>
+
+      <div class="section-subtitle">
+        Todas las imágenes se sincronizan automáticamente desde Google Photos y Google Drive.
+      </div>
+
+      <div class="gallery" id="gallery"></div>
+
+    </div>
+
+  </section>
+
+  <section id="ia">
+
+    <div class="container">
+
+      <div class="ai-section">
+
+        <h2 class="section-title">✨ IA Memories</h2>
+
+        <div class="section-subtitle">
+          La IA analiza las fotos y genera pequeños recuerdos,
+          agrupando momentos parecidos y detectando emociones.
+        </div>
+
+        <div class="ai-grid" id="aiGrid"></div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <footer>
+    Hecho con amor para Copito 🤍🐾
+  </footer>
+
+  <script>
+
+    // HUELLITAS
+
+    const floatingPaws = document.getElementById('floatingPaws');
+
+    for(let i = 0; i < 30; i++) {
+
+      const paw = document.createElement('div');
+      paw.classList.add('paw');
+      paw.innerHTML = '🐾';
+
+      paw.style.left = Math.random() * 100 + '%';
+      paw.style.animationDuration = (15 + Math.random() * 10) + 's';
+      paw.style.fontSize = (20 + Math.random() * 20) + 'px';
+      paw.style.animationDelay = Math.random() * 10 + 's';
+
+      floatingPaws.appendChild(paw);
+
+    }
+
+
+    // FOTOS
+async function loadPhotos() {
+
+  const response = await fetch('photos.json');
+
+  const photos = await response.json();
+
+  renderMemories(photos);
+  renderGallery(photos);
+
+}
+
+function renderMemories(photos) {
+
+  const memoryGrid = document.getElementById('memoryGrid');
+
+  memoryGrid.innerHTML = '';
+
+  photos.slice(0,3).forEach(photo => {
+
+    const card = document.createElement('div');
+
+    card.classList.add('memory-card');
+
+    card.innerHTML = `
+      <img src="${photo.url}">
+
+      <div class="memory-content">
+        <h3>${photo.title || photo.name}</h3>
+        <p>${photo.text || 'Recuerdo de Copito 🤍'}</p>
+      </div>
+    `;
+
+    memoryGrid.appendChild(card);
+
+  });
+
+}
+
+function renderGallery(photos) {
+
+  const gallery = document.getElementById('gallery');
+
+  gallery.innerHTML = '';
+
+  photos.forEach(photo => {
+
+    const div = document.createElement('div');
+
+    div.classList.add('photo');
+
+    div.innerHTML = `
+      <img src="${photo.url}">
+    `;
+
+    gallery.appendChild(div);
+
+  });
+
+}
+
+loadPhotos();
+
+    // RECUERDOS
+
+    const memoryGrid = document.getElementById('memoryGrid');
+
+    photos.slice(0,3).forEach(photo => {
+
+      const card = document.createElement('div');
+      card.classList.add('memory-card');
+
+      card.innerHTML = `
+        <img src="${photo.url}">
+
+        <div class="memory-content">
+          <h3>${photo.title}</h3>
+          <p>${photo.text}</p>
+        </div>
+      `;
+
+      memoryGrid.appendChild(card);
+
+    });
+
+
+    // GALERIA
+
+
+    // IA MEMORIES
+
+    const aiMemories = [
+      '🤍 La mayoría de fotos muestran momentos tranquilos junto a la familia.',
+      '🐾 Copito aparece muchas veces descansando cerca de las personas que quería.',
+      '🌤️ La IA detectó recuerdos felices y ambientes cálidos en casi todas las imágenes.',
+      '✨ Muchas fotos muestran miradas relajadas y confianza, reflejando cuánto amor recibió.',
+      '🏡 Los recuerdos más frecuentes ocurren dentro de casa y durante paseos tranquilos.',
+      '📸 El sistema detectó que Copito siempre estaba cerca de quienes más quería.'
+    ];
+
+    const aiGrid = document.getElementById('aiGrid');
+
+    aiMemories.forEach(text => {
+
+      const div = document.createElement('div');
+      div.classList.add('ai-card');
+      div.innerHTML = text;
+
+      aiGrid.appendChild(div);
+
+    });
+
+
+    // FUTURO
+    // fetch('photos.json')
+    // OpenAI API
+    // ordenar automáticamente por fecha
+    // reconocer momentos similares
+    // detectar personas
+    // crear timeline automática
+    // slideshow automático
+
+  </script>
+
+</body>
+</html>
