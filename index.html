@@ -670,31 +670,46 @@
 
 
     // FOTOS
+// CARGAR FOTOS DESDE photos.json
+
 async function loadPhotos() {
 
-  const response = await fetch('photos.json');
+  try {
 
-  const photos = await response.json();
+    const response = await fetch('photos.json');
 
-  renderMemories(photos);
-  renderGallery(photos);
+    const photos = await response.json();
+
+    renderMemories(photos);
+    renderGallery(photos);
+
+  } catch(error) {
+
+    console.error('Error cargando photos.json:', error);
+
+  }
 
 }
+
+
+// RECUERDOS DESTACADOS
 
 function renderMemories(photos) {
 
   const memoryGrid = document.getElementById('memoryGrid');
 
+  if(!memoryGrid) return;
+
   memoryGrid.innerHTML = '';
 
-  photos.slice(0,3).forEach(photo => {
+  photos.slice(0, 3).forEach(photo => {
 
     const card = document.createElement('div');
 
     card.classList.add('memory-card');
 
     card.innerHTML = `
-      <img src="${photo.url}">
+      <img src="${photo.url}" alt="${photo.name}">
 
       <div class="memory-content">
         <h3>${photo.title || photo.name}</h3>
@@ -708,9 +723,14 @@ function renderMemories(photos) {
 
 }
 
+
+// GALERÍA COMPLETA
+
 function renderGallery(photos) {
 
   const gallery = document.getElementById('gallery');
+
+  if(!gallery) return;
 
   gallery.innerHTML = '';
 
@@ -721,7 +741,7 @@ function renderGallery(photos) {
     div.classList.add('photo');
 
     div.innerHTML = `
-      <img src="${photo.url}">
+      <img src="${photo.url}" alt="${photo.name}">
     `;
 
     gallery.appendChild(div);
@@ -730,35 +750,10 @@ function renderGallery(photos) {
 
 }
 
+
+// INICIAR
+
 loadPhotos();
-
-    // RECUERDOS
-
-    const memoryGrid = document.getElementById('memoryGrid');
-
-    photos.slice(0,3).forEach(photo => {
-
-      const card = document.createElement('div');
-      card.classList.add('memory-card');
-
-      card.innerHTML = `
-        <img src="${photo.url}">
-
-        <div class="memory-content">
-          <h3>${photo.title}</h3>
-          <p>${photo.text}</p>
-        </div>
-      `;
-
-      memoryGrid.appendChild(card);
-
-    });
-
-
-    // GALERIA
-
-
-    // IA MEMORIES
 
     const aiMemories = [
       '🤍 La mayoría de fotos muestran momentos tranquilos junto a la familia.',
