@@ -1,792 +1,2944 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Copito • Siempre en Nuestro Corazón</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
-
-  <style>
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to bottom, #fffdfb, #fff7ef);
-      color: #5d4c40;
-      overflow-x: hidden;
-    }
-
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image:
-        radial-gradient(rgba(210,180,140,0.12) 2px, transparent 2px);
-      background-size: 40px 40px;
-      opacity: 0.35;
-      z-index: -2;
-    }
-
-    .container {
-      width: min(1300px, 92%);
-      margin: auto;
-    }
-
-    .floating-paws {
-      position: fixed;
-      inset: 0;
-      overflow: hidden;
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    .paw {
-      position: absolute;
-      font-size: 28px;
-      opacity: 0.08;
-      animation: floatPaw linear infinite;
-    }
-
-    @keyframes floatPaw {
-      from {
-        transform: translateY(120vh) rotate(0deg);
-      }
-
-      to {
-        transform: translateY(-120vh) rotate(360deg);
-      }
-    }
-
-    header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      padding: 1.2rem 0;
-      background: rgba(255,255,255,0.78);
-      backdrop-filter: blur(15px);
-      border-bottom: 1px solid rgba(210,180,140,0.18);
-      z-index: 1000;
-    }
-
-    .navbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      font-size: 1.5rem;
-      color: #8d7058;
-      font-weight: 700;
-      font-family: 'Quicksand', sans-serif;
-    }
-
-    nav {
-      display: flex;
-      gap: 2rem;
-    }
-
-    nav a {
-      text-decoration: none;
-      color: #7b6655;
-      font-weight: 500;
-      position: relative;
-      transition: 0.3s;
-    }
-
-    nav a::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      bottom: -5px;
-      width: 0;
-      height: 2px;
-      background: #d2b48c;
-      transition: 0.3s;
-    }
-
-    nav a:hover::after {
-      width: 100%;
-    }
-
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding-top: 100px;
-      position: relative;
-    }
-
-    .hero-wrapper {
-      display: grid;
-      grid-template-columns: 420px 1fr;
-      gap: 5rem;
-      align-items: center;
-    }
-
-    .hero-image {
-      position: relative;
-    }
-
-    .hero-image::before {
-      content: '';
-      position: absolute;
-      inset: -20px;
-      background: linear-gradient(135deg, #fff5eb, #fff);
-      border-radius: 40px;
-      z-index: -1;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-    }
-
-    .hero-image img {
-      width: 100%;
-      border-radius: 35px;
-      height: 560px;
-      object-fit: cover;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.12);
-    }
-
-    .hero-content h1 {
-      font-size: 6rem;
-      line-height: 1;
-      color: #8d7058;
-      font-family: 'Quicksand', sans-serif;
-      margin-bottom: 1rem;
-    }
-
-    .hero-content .dates {
-      color: #aa907b;
-      font-size: 1.1rem;
-      margin-bottom: 2rem;
-    }
-
-    .hero-content p {
-      line-height: 2;
-      color: #6d5b4e;
-      font-size: 1.08rem;
-      margin-bottom: 2rem;
-      max-width: 700px;
-    }
-
-    .hero-buttons {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      padding: 1rem 1.8rem;
-      border-radius: 999px;
-      text-decoration: none;
-      transition: 0.3s;
-      font-weight: 600;
-    }
-
-    .btn-primary {
-      background: #d2b48c;
-      color: white;
-      box-shadow: 0 10px 20px rgba(210,180,140,0.35);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-4px);
-    }
-
-    .btn-secondary {
-      background: white;
-      color: #8d7058;
-      border: 1px solid rgba(210,180,140,0.35);
-    }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3,1fr);
-      gap: 1.5rem;
-      margin-top: 3rem;
-    }
-
-    .stat-card {
-      background: rgba(255,255,255,0.7);
-      padding: 1.6rem;
-      border-radius: 24px;
-      text-align: center;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.05);
-    }
-
-    .stat-card h3 {
-      font-size: 2rem;
-      color: #8d7058;
-      margin-bottom: 0.5rem;
-    }
-
-    section {
-      padding: 7rem 0;
-    }
-
-    .section-title {
-      text-align: center;
-      font-size: 3.2rem;
-      color: #8d7058;
-      margin-bottom: 1rem;
-      font-family: 'Quicksand', sans-serif;
-    }
-
-    .section-subtitle {
-      text-align: center;
-      max-width: 750px;
-      margin: auto auto 4rem auto;
-      line-height: 1.9;
-      color: #8d7867;
-    }
-
-    .memories-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px,1fr));
-      gap: 2rem;
-    }
-
-    .memory-card {
-      background: white;
-      border-radius: 35px;
-      overflow: hidden;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.06);
-      transition: 0.4s;
-    }
-
-    .memory-card:hover {
-      transform: translateY(-10px);
-    }
-
-    .memory-card img {
-      width: 100%;
-      height: 330px;
-      object-fit: cover;
-    }
-
-    .memory-content {
-      padding: 2rem;
-    }
-
-    .memory-content h3 {
-      color: #8d7058;
-      margin-bottom: 1rem;
-      font-size: 1.4rem;
-    }
-
-    .memory-content p {
-      line-height: 1.8;
-      color: #6d5b4e;
-    }
-
-    .timeline {
-      max-width: 950px;
-      margin: auto;
-      position: relative;
-    }
-
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 50%;
-      top: 0;
-      width: 3px;
-      height: 100%;
-      background: rgba(210,180,140,0.35);
-    }
-
-    .timeline-item {
-      width: 50%;
-      padding: 2rem;
-      position: relative;
-    }
-
-    .timeline-item:nth-child(odd) {
-      left: 0;
-      text-align: right;
-    }
-
-    .timeline-item:nth-child(even) {
-      left: 50%;
-    }
-
-    .timeline-box {
-      background: white;
-      padding: 2rem;
-      border-radius: 28px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    }
-
-    .timeline-box h3 {
-      color: #8d7058;
-      margin-bottom: 1rem;
-    }
-
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
-      gap: 1.5rem;
-    }
-
-    .gallery .photo {
-      overflow: hidden;
-      border-radius: 30px;
-      aspect-ratio: 1/1;
-      position: relative;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
-    }
-
-    .gallery img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: 0.5s;
-    }
-
-    .gallery .photo:hover img {
-      transform: scale(1.08);
-    }
-
-    .gallery .photo::after {
-      content: '🤍';
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      width: 40px;
-      height: 40px;
-      background: rgba(255,255,255,0.85);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .ai-section {
-      background: linear-gradient(135deg, #fffaf5, #ffffff);
-      border-radius: 45px;
-      padding: 4rem;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.05);
-    }
-
-    .ai-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
-      gap: 1.5rem;
-      margin-top: 3rem;
-    }
-
-    .ai-card {
-      background: white;
-      padding: 2rem;
-      border-radius: 28px;
-      line-height: 1.9;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.04);
-    }
-
-    footer {
-      padding: 4rem 0;
-      text-align: center;
-      color: #9a8471;
-    }
-
-    @media(max-width: 1000px) {
-
-      .hero-wrapper {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-content {
-        text-align: center;
-      }
-
-      .hero-buttons {
-        justify-content: center;
-      }
-
-      .stats {
-        grid-template-columns: 1fr;
-      }
-
-      .timeline::before {
-        left: 20px;
-      }
-
-      .timeline-item {
-        width: 100%;
-        left: 0 !important;
-        text-align: left !important;
-        padding-left: 60px;
-      }
-
-    }
-
-    @media(max-width: 768px) {
-
-      header {
-        padding: 1rem 0;
-      }
-
-      .navbar {
-        flex-direction: column;
-        gap: 1rem;
-      }
-
-      nav {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 1rem;
-      }
-
-      .hero-content h1 {
-        font-size: 4rem;
-      }
-
-      .hero-image img {
-        height: 420px;
-      }
-
-      .section-title {
-        font-size: 2.4rem;
-      }
-
-      .ai-section {
-        padding: 2rem;
-      }
-
-    }
-
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Copito — Siempre en nuestro corazón</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet"></script>
+<style>
+/* ===== CSS VARIABLES ===== */
+:root {
+  --cream: #faf6f0;
+  --warm-white: #fff9f4;
+  --beige: #efe8dc;
+  --beige-mid: #e0d4c3;
+  --caramel: #c8a882;
+  --brown-soft: #9b7a5b;
+  --brown-deep: #6b4e35;
+  --text-dark: #3a2e26;
+  --text-mid: #6b5c4e;
+  --text-light: #9c8c7e;
+  --gold: #c9a96e;
+  --shadow: rgba(107, 78, 53, 0.08);
+  --shadow-mid: rgba(107, 78, 53, 0.15);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Lato', sans-serif;
+  --transition: 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --transition-slow: 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  background: var(--cream);
+  color: var(--text-dark);
+  font-family: var(--font-sans);
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ===== PARTICLES CANVAS ===== */
+#particles-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+}
+
+/* ===== NAVIGATION ===== */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  padding: 1.2rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(250, 246, 240, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--beige);
+  transition: all 0.4s ease;
+}
+
+.nav-logo {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: var(--brown-deep);
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.nav-logo .paw { font-size: 1rem; }
+
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-mid);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -3px; left: 0;
+  width: 0; height: 1px;
+  background: var(--gold);
+  transition: width 0.3s ease;
+}
+.nav-links a:hover { color: var(--brown-deep); }
+.nav-links a:hover::after { width: 100%; }
+
+.nav-actions {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+}
+
+.btn-icon {
+  background: none;
+  border: 1px solid var(--beige-mid);
+  border-radius: 50%;
+  width: 38px; height: 38px;
+  cursor: pointer;
+  color: var(--text-mid);
+  font-size: 0.9rem;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.3s ease;
+}
+.btn-icon:hover {
+  background: var(--beige);
+  color: var(--brown-deep);
+  border-color: var(--caramel);
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 5px;
+}
+.hamburger span {
+  display: block;
+  width: 22px; height: 1.5px;
+  background: var(--text-mid);
+  transition: all 0.3s ease;
+}
+
+/* ===== HERO SECTION ===== */
+#inicio {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 2rem 4rem;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(201, 169, 110, 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 80%, rgba(200, 168, 130, 0.10) 0%, transparent 55%),
+    var(--cream);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 680px;
+  animation: fadeInUp 1.8s ease forwards;
+}
+
+.hero-paw-deco {
+  font-size: 1.4rem;
+  color: var(--caramel);
+  opacity: 0.6;
+  margin-bottom: 2rem;
+  animation: float 4s ease-in-out infinite;
+}
+
+.hero-photo-frame {
+  width: 220px; height: 220px;
+  margin: 0 auto 2.5rem;
+  position: relative;
+}
+
+.hero-photo-ring {
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 1.5px solid var(--caramel);
+  opacity: 0.5;
+  animation: pulse-ring 3s ease-in-out infinite;
+}
+
+.hero-photo-ring-2 {
+  position: absolute;
+  inset: -18px;
+  border-radius: 50%;
+  border: 1px solid var(--caramel);
+  opacity: 0.25;
+  animation: pulse-ring 3s ease-in-out infinite 0.5s;
+}
+
+.hero-photo {
+  width: 100%; height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--warm-white);
+  box-shadow: 0 8px 40px var(--shadow-mid), 0 0 0 1px var(--beige-mid);
+  display: flex; align-items: center; justify-content: center;
+  background: var(--beige);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.5s ease;
+}
+.hero-photo:hover { transform: scale(1.03); }
+
+.hero-photo-placeholder {
+  font-size: 5rem;
+  color: var(--caramel);
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+.hero-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.hero-photo-label {
+  position: absolute;
+  bottom: -10px; right: -10px;
+  background: var(--warm-white);
+  border: 1px solid var(--beige-mid);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 0.7rem;
+  color: var(--text-light);
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.hero-photo-label:hover {
+  background: var(--beige);
+  color: var(--brown-deep);
+}
+
+h1.hero-name {
+  font-family: var(--font-serif);
+  font-size: clamp(3rem, 8vw, 5.5rem);
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  color: var(--brown-deep);
+  line-height: 1.1;
+  margin-bottom: 0.4rem;
+}
+
+.hero-dates {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  color: var(--caramel);
+  letter-spacing: 0.25em;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+
+.hero-divider {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--caramel), transparent);
+  margin: 1.5rem auto;
+}
+
+.hero-quote {
+  font-family: var(--font-serif);
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--text-mid);
+  line-height: 1.8;
+  max-width: 520px;
+  margin: 0 auto 2.5rem;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.85rem 2.2rem;
+  background: var(--brown-deep);
+  color: var(--warm-white);
+  border: none;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+.btn-primary:hover {
+  background: var(--brown-soft);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(107, 78, 53, 0.2);
+}
+
+.btn-secondary {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.85rem 2.2rem;
+  background: transparent;
+  color: var(--brown-deep);
+  border: 1px solid var(--beige-mid);
+  border-radius: 40px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+.btn-secondary:hover {
+  background: var(--beige);
+  border-color: var(--caramel);
+  transform: translateY(-2px);
+}
+
+/* ===== SECTION SHARED ===== */
+section {
+  position: relative;
+  z-index: 1;
+  padding: 6rem 2rem;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.section-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--caramel);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+.section-eyebrow::before,
+.section-eyebrow::after {
+  content: '';
+  width: 30px; height: 1px;
+  background: var(--caramel);
+  opacity: 0.5;
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 300;
+  color: var(--brown-deep);
+  letter-spacing: 0.04em;
+  margin-bottom: 1rem;
+}
+
+.section-subtitle {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--text-light);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* ===== SEARCH BAR ===== */
+.search-container {
+  max-width: 560px;
+  margin: 0 auto 3rem;
+  position: relative;
+}
+
+.search-input {
+  width: 100%;
+  padding: 1rem 3rem 1rem 1.5rem;
+  border: 1.5px solid var(--beige-mid);
+  border-radius: 40px;
+  background: var(--warm-white);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  color: var(--text-dark);
+  outline: none;
+  transition: all 0.3s ease;
+}
+.search-input:focus {
+  border-color: var(--caramel);
+  box-shadow: 0 0 0 4px rgba(201, 169, 110, 0.1);
+}
+.search-input::placeholder { color: var(--text-light); }
+
+.search-icon {
+  position: absolute;
+  right: 1.2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-light);
+  font-size: 1rem;
+  pointer-events: none;
+}
+
+.filter-pills {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.filter-pill {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  padding: 0.45rem 1.2rem;
+  border-radius: 20px;
+  border: 1px solid var(--beige-mid);
+  background: transparent;
+  color: var(--text-mid);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.filter-pill:hover,
+.filter-pill.active {
+  background: var(--brown-deep);
+  color: var(--warm-white);
+  border-color: var(--brown-deep);
+}
+
+/* ===== UPLOAD ZONE ===== */
+.upload-zone {
+  border: 1.5px dashed var(--beige-mid);
+  border-radius: 20px;
+  padding: 3rem 2rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  transition: all 0.4s ease;
+  cursor: pointer;
+  background: var(--warm-white);
+}
+.upload-zone:hover,
+.upload-zone.drag-over {
+  border-color: var(--caramel);
+  background: rgba(201, 169, 110, 0.05);
+}
+.upload-zone-icon { font-size: 2.5rem; color: var(--caramel); margin-bottom: 1rem; }
+.upload-zone h3 {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: var(--brown-soft);
+  margin-bottom: 0.5rem;
+}
+.upload-zone p { font-size: 0.85rem; color: var(--text-light); }
+.upload-zone input[type="file"] { display: none; }
+
+/* ===== MASONRY GALLERY ===== */
+.gallery-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.masonry-grid {
+  columns: 4;
+  column-gap: 1.2rem;
+}
+@media (max-width: 1100px) { .masonry-grid { columns: 3; } }
+@media (max-width: 750px) { .masonry-grid { columns: 2; } }
+@media (max-width: 480px) { .masonry-grid { columns: 1; } }
+
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 1.2rem;
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--beige);
+  box-shadow: 0 2px 16px var(--shadow);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.masonry-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px var(--shadow-mid);
+}
+.masonry-item.featured {
+  border: 2px solid var(--gold);
+}
+
+.masonry-item img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+.masonry-item:hover img { transform: scale(1.04); }
+
+.masonry-overlay {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 2rem 1rem 1rem;
+  background: linear-gradient(to top, rgba(58, 46, 38, 0.7), transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.masonry-item:hover .masonry-overlay { opacity: 1; }
+
+.masonry-info {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+}
+.masonry-info .photo-date { display: block; font-family: var(--font-serif); font-style: italic; }
+.masonry-info .photo-desc { font-size: 0.72rem; opacity: 0.8; }
+
+.masonry-fav {
+  position: absolute;
+  top: 0.7rem; right: 0.7rem;
+  background: rgba(255,255,255,0.85);
+  border: none;
+  border-radius: 50%;
+  width: 30px; height: 30px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  font-size: 0.85rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+}
+.masonry-item:hover .masonry-fav { opacity: 1; }
+.masonry-fav.active { opacity: 1; color: #e05c5c; }
+
+.masonry-placeholder {
+  width: 100%;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  color: var(--text-light);
+  font-size: 0.85rem;
+  font-family: var(--font-serif);
+  font-style: italic;
+}
+.masonry-placeholder-icon { font-size: 2rem; }
+
+/* ===== EMPTY STATE ===== */
+.empty-gallery {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--text-light);
+}
+.empty-gallery .icon { font-size: 3rem; margin-bottom: 1rem; }
+.empty-gallery p { font-family: var(--font-serif); font-style: italic; font-size: 1.1rem; }
+
+/* ===== TIMELINE ===== */
+#timeline { background: var(--warm-white); }
+
+.timeline-container {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.timeline-line {
+  position: absolute;
+  left: 50%;
+  top: 0; bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--beige-mid) 10%, var(--beige-mid) 90%, transparent);
+  transform: translateX(-50%);
+}
+
+.timeline-group { margin-bottom: 3rem; }
+
+.timeline-year-badge {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.timeline-year-badge span {
+  display: inline-block;
+  background: var(--cream);
+  border: 1.5px solid var(--beige-mid);
+  border-radius: 30px;
+  padding: 0.4rem 1.4rem;
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  color: var(--caramel);
+  letter-spacing: 0.1em;
+}
+
+.timeline-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.7s ease;
+}
+.timeline-item.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.timeline-item:nth-child(odd) { flex-direction: row-reverse; }
+
+.timeline-dot {
+  flex-shrink: 0;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--caramel);
+  border: 3px solid var(--cream);
+  box-shadow: 0 0 0 1px var(--caramel);
+  margin-top: 6px;
+  position: relative;
+  z-index: 1;
+}
+
+.timeline-card {
+  flex: 1;
+  background: var(--cream);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 16px var(--shadow);
+  transition: box-shadow 0.3s ease;
+}
+.timeline-card:hover { box-shadow: 0 8px 30px var(--shadow-mid); }
+
+.timeline-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.timeline-card-body { padding: 1rem 1.2rem 1.2rem; }
+.timeline-card-date {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: var(--caramel);
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+.timeline-card-desc {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--text-mid);
+  line-height: 1.5;
+}
+
+/* ===== FAVORITES ===== */
+#favoritas .favorites-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.fav-card {
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--warm-white);
+  box-shadow: 0 2px 20px var(--shadow);
+  transition: all 0.4s ease;
+  cursor: pointer;
+  position: relative;
+}
+.fav-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px var(--shadow-mid);
+}
+.fav-card img {
+  width: 100%; height: 220px;
+  object-fit: cover;
+  display: block;
+}
+.fav-card-body {
+  padding: 1rem 1.2rem 1.2rem;
+  border-top: 1px solid var(--beige);
+}
+.fav-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.4rem;
+}
+
+/* ===== MESSAGES / DEDICATIONS ===== */
+#mensajes { background: var(--beige); }
+
+.messages-grid {
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.message-card {
+  background: var(--warm-white);
+  border-radius: 18px;
+  padding: 1.8rem;
+  box-shadow: 0 2px 16px var(--shadow);
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.message-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 28px var(--shadow-mid);
+}
+.message-card::before {
+  content: '\201C';
+  position: absolute;
+  top: 0.8rem; left: 1.2rem;
+  font-family: var(--font-serif);
+  font-size: 3rem;
+  color: var(--caramel);
+  opacity: 0.3;
+  line-height: 1;
+}
+
+.message-text {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--text-mid);
+  line-height: 1.7;
+  margin-bottom: 1rem;
+  padding-top: 0.5rem;
+}
+
+.message-author {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: var(--caramel);
+  text-transform: uppercase;
+}
+.message-date { font-size: 0.68rem; color: var(--text-light); margin-top: 0.2rem; }
+
+.message-form {
+  max-width: 560px;
+  margin: 0 auto;
+  background: var(--warm-white);
+  border-radius: 20px;
+  padding: 2.5rem;
+  box-shadow: 0 2px 20px var(--shadow);
+}
+.message-form h3 {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--brown-deep);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.form-field { margin-bottom: 1.2rem; }
+.form-field input,
+.form-field textarea {
+  width: 100%;
+  padding: 0.9rem 1.2rem;
+  border: 1.5px solid var(--beige-mid);
+  border-radius: 12px;
+  background: var(--cream);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  color: var(--text-dark);
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  resize: none;
+}
+.form-field input:focus,
+.form-field textarea:focus {
+  border-color: var(--caramel);
+  box-shadow: 0 0 0 4px rgba(201, 169, 110, 0.1);
+}
+.form-field input::placeholder,
+.form-field textarea::placeholder { color: var(--text-light); }
+
+/* ===== SLIDESHOW / PRESENTACIÓN ===== */
+.slideshow-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 15, 10, 0.97);
+  z-index: 2000;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.slideshow-overlay.active { display: flex; }
+
+.slideshow-img-wrap {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slideshow-img {
+  max-width: 90vw;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 10px;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+.slideshow-img.visible { opacity: 1; }
+
+.slideshow-caption {
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: rgba(255,255,255,0.7);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1rem;
+}
+
+.slideshow-controls {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.slideshow-btn {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 50%;
+  width: 42px; height: 42px;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.3s ease;
+}
+.slideshow-btn:hover { background: rgba(255,255,255,0.2); }
+
+.slideshow-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 50%;
+  width: 50px; height: 50px;
+  color: white;
+  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.3s ease;
+}
+.slideshow-nav:hover { background: rgba(255,255,255,0.2); }
+.slideshow-nav.prev { left: 2rem; }
+.slideshow-nav.next { right: 2rem; }
+
+.slideshow-progress {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+}
+.progress-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.3);
+  transition: background 0.3s ease;
+}
+.progress-dot.active { background: var(--caramel); }
+
+/* ===== LIGHTBOX ===== */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 15, 10, 0.95);
+  z-index: 1500;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+.lightbox.active { display: flex; }
+
+.lightbox-content {
+  max-width: 90vw;
+  max-height: 90vh;
+  position: relative;
+}
+.lightbox-content img {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 10px;
+  display: block;
+}
+.lightbox-close {
+  position: absolute;
+  top: -2.5rem; right: 0;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+.lightbox-close:hover { opacity: 1; }
+.lightbox-info {
+  text-align: center;
+  color: rgba(255,255,255,0.6);
+  font-family: var(--font-serif);
+  font-style: italic;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: var(--brown-deep);
+  color: rgba(255, 249, 244, 0.7);
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+}
+footer .footer-name {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  font-weight: 300;
+  color: rgba(255, 249, 244, 0.9);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.08em;
+}
+footer .footer-heart { color: var(--caramel); margin: 0 0.3rem; }
+footer .footer-links {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-top: 1.2rem;
+}
+footer .footer-links a {
+  color: rgba(255,249,244,0.5);
+  text-decoration: none;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: color 0.3s;
+}
+footer .footer-links a:hover { color: var(--caramel); }
+
+/* ===== MUSIC PLAYER ===== */
+.music-player {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  background: rgba(250, 246, 240, 0.92);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--beige-mid);
+  border-radius: 40px;
+  padding: 0.6rem 1.2rem 0.6rem 0.6rem;
+  box-shadow: 0 4px 20px var(--shadow-mid);
+  transition: all 0.3s ease;
+}
+.music-btn {
+  background: var(--brown-deep);
+  border: none;
+  border-radius: 50%;
+  width: 34px; height: 34px;
+  color: white;
+  cursor: pointer;
+  font-size: 0.85rem;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.3s;
+  flex-shrink: 0;
+}
+.music-btn:hover { background: var(--brown-soft); }
+.music-label {
+  font-size: 0.7rem;
+  color: var(--text-light);
+  letter-spacing: 0.08em;
+}
+
+/* ===== TOAST ===== */
+.toast {
+  position: fixed;
+  bottom: 5rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--brown-deep);
+  color: var(--warm-white);
+  padding: 0.8rem 1.8rem;
+  border-radius: 30px;
+  font-size: 0.82rem;
+  letter-spacing: 0.05em;
+  z-index: 3000;
+  opacity: 0;
+  transition: all 0.4s ease;
+  pointer-events: none;
+}
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ===== UPLOAD PREVIEW ===== */
+.upload-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 0.8rem;
+  margin-top: 1.5rem;
+}
+.preview-item {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  aspect-ratio: 1;
+}
+.preview-item img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.preview-remove {
+  position: absolute;
+  top: 4px; right: 4px;
+  background: rgba(58, 46, 38, 0.7);
+  border: none;
+  border-radius: 50%;
+  width: 24px; height: 24px;
+  color: white;
+  cursor: pointer;
+  font-size: 0.8rem;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes pulse-ring {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.04); opacity: 0.3; }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.fade-in-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== MOBILE NAV ===== */
+@media (max-width: 768px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links {
+    position: fixed;
+    top: 0; right: -100%;
+    height: 100vh;
+    width: 70vw;
+    background: var(--warm-white);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem;
+    transition: right 0.5s ease;
+    box-shadow: -5px 0 30px var(--shadow);
+    z-index: 999;
+  }
+  .nav-links.open { right: 0; }
+  .nav-links a { font-size: 1rem; }
+  .hamburger { display: flex; }
+  .nav-actions { display: none; }
+  .timeline-line { display: none; }
+  .timeline-item, .timeline-item:nth-child(odd) {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .slideshow-nav.prev { left: 0.5rem; }
+  .slideshow-nav.next { right: 0.5rem; }
+  .music-player { bottom: 1rem; right: 1rem; }
+}
+
+/* ===== SCROLL INDICATOR ===== */
+.scroll-hint {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--text-light);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  animation: float 2.5s ease-in-out infinite;
+}
+.scroll-hint-arrow {
+  width: 20px; height: 20px;
+  border-right: 1px solid var(--caramel);
+  border-bottom: 1px solid var(--caramel);
+  transform: rotate(45deg);
+  margin-top: -4px;
+}
+
+/* ===== VIDEOS SECTION ===== */
+#videos { background: var(--beige); }
+.videos-placeholder {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 4rem 2rem;
+  border: 1.5px dashed var(--beige-mid);
+  border-radius: 20px;
+  background: var(--warm-white);
+}
+.videos-placeholder .icon { font-size: 3rem; margin-bottom: 1rem; }
+.videos-placeholder p {
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--text-light);
+  margin-bottom: 1.5rem;
+}
+.video-input { display: none; }
+
+/* ===== RECENT MEMORIES ===== */
+#recientes { background: var(--cream); }
+</style>
 </head>
 <body>
 
-  <div class="floating-paws" id="floatingPaws"></div>
+<!-- Particles -->
+<canvas id="particles-canvas"></canvas>
 
-  <header>
-    <div class="container navbar">
+<!-- Navigation -->
+<nav id="main-nav">
+  <div class="nav-logo">
+    <span class="paw">🐾</span> Copito
+  </div>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#inicio" onclick="closeMenu()">Inicio</a></li>
+    <li><a href="#recuerdos" onclick="closeMenu()">Recuerdos</a></li>
+    <li><a href="#timeline" onclick="closeMenu()">Línea Temporal</a></li>
+    <li><a href="#favoritas" onclick="closeMenu()">Favoritas</a></li>
+    <li><a href="#videos" onclick="closeMenu()">Videos</a></li>
+    <li><a href="#mensajes" onclick="closeMenu()">Mensajes</a></li>
+    <li><a href="#recientes" onclick="closeMenu()">Recientes</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="btn-icon" title="Modo presentación" onclick="startSlideshow()">▶</button>
+    <button class="btn-icon" title="Buscar" onclick="document.getElementById('recuerdos').scrollIntoView({behavior:'smooth'})">🔍</button>
+  </div>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
 
-      <div class="logo">
-        🐾 Copito
+<!-- HERO -->
+<section id="inicio">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-paw-deco">🐾</div>
+
+    <div class="hero-photo-frame">
+      <div class="hero-photo-ring"></div>
+      <div class="hero-photo-ring-2"></div>
+      <div class="hero-photo" id="hero-photo-display" onclick="triggerHeroUpload()">
+        <div class="hero-photo-placeholder" id="hero-placeholder">🐶</div>
+        <img id="hero-img" src="" alt="Copito" style="display:none;">
       </div>
-
-      <nav>
-        <a href="#inicio">Inicio</a>
-        <a href="#recuerdos">Recuerdos</a>
-        <a href="#vida">Su Vida</a>
-        <a href="#galeria">Galería</a>
-        <a href="#ia">IA Memories</a>
-      </nav>
-
+      <label class="hero-photo-label" onclick="triggerHeroUpload()">+ Foto principal</label>
     </div>
-  </header>
+    <input type="file" id="hero-photo-input" accept="image/*" style="display:none;" onchange="setHeroPhoto(this)">
 
-  <section class="hero" id="inicio">
-
-    <div class="container hero-wrapper">
-
-      <div class="hero-image">
-        <img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?q=80&w=1200&auto=format&fit=crop" alt="Copito">
-      </div>
-
-      <div class="hero-content">
-
-        <h1>Copito</h1>
-
-        <div class="dates">
-          06 Octubre 2007 — 09 Mayo 2026
-        </div>
-
-        <p>
-          Gracias por acompañarnos durante 18 años llenos de amor, juegos,
-          compañía y recuerdos hermosos.
-          Esta página guarda parte de tu historia y todos los momentos
-          que siempre vivirán con nosotros.
-        </p>
-
-        <div class="hero-buttons">
-          <a href="#galeria" class="btn btn-primary">Ver recuerdos</a>
-          <a href="#ia" class="btn btn-secondary">IA Memories ✨</a>
-        </div>
-
-        <div class="stats">
-
-          <div class="stat-card">
-            <h3>18</h3>
-            <span>Años juntos</span>
-          </div>
-
-          <div class="stat-card">
-            <h3>∞</h3>
-            <span>Recuerdos</span>
-          </div>
-
-          <div class="stat-card">
-            <h3>🐾</h3>
-            <span>Siempre familia</span>
-          </div>
-
-        </div>
-
-      </div>
-
+    <h1 class="hero-name">Copito</h1>
+    <p class="hero-dates">6 de Octubre de 2007 &mdash; 9 de mayo de 2026</p>
+    <div class="hero-divider"></div>
+    <p class="hero-quote">"No se va quien queda en el corazón.<br>Sigues aquí, en cada recuerdo, en cada sonrisa que me enseñaste."</p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="document.getElementById('recuerdos').scrollIntoView({behavior:'smooth'})">Ver recuerdos</button>
+      <button class="btn-secondary" onclick="startSlideshow()">▶ Presentación</button>
     </div>
+  </div>
+  <div class="scroll-hint">
+    <span>Recordar</span>
+    <div class="scroll-hint-arrow"></div>
+  </div>
+</section>
 
-  </section>
+<!-- RECUERDOS (Gallery) -->
+<section id="recuerdos">
+  <div class="section-header fade-in-section">
+    <p class="section-eyebrow">🐾 álbum</p>
+    <h2 class="section-title">Recuerdos</h2>
+    <p class="section-subtitle">Cada imagen guarda un momento irrepetible</p>
+  </div>
 
-  <section id="recuerdos">
+  <div class="gallery-wrap">
 
-    <div class="container">
 
-      <h2 class="section-title">Recuerdos Especiales</h2>
-
-      <div class="section-subtitle">
-        La inteligencia artificial organiza automáticamente las mejores fotos,
-        detecta recuerdos similares y genera pequeñas memorias de Copito.
-      </div>
-
-      <div class="memories-grid" id="memoryGrid"></div>
-
+    <!-- Filters -->
+    <div class="filter-pills fade-in-section" id="filter-pills">
+      <button class="filter-pill active" onclick="setFilter('todos', this)">Todos</button>
+      <button class="filter-pill" onclick="setFilter('favoritas', this)">⭐ Favoritas</button>
     </div>
 
-  </section>
 
-  <section id="vida">
 
-    <div class="container">
-
-      <h2 class="section-title">La Vida de Copito</h2>
-
-      <div class="timeline">
-
-        <div class="timeline-item">
-          <div class="timeline-box">
-            <h3>2007 • El comienzo</h3>
-            <p>Llegaste pequeñito y rápidamente te convertiste en parte de la familia.</p>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-box">
-            <h3>2012 • Aventuras</h3>
-            <p>Paseos, juegos y momentos felices llenaron cada año.</p>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-box">
-            <h3>2018 • Compañía</h3>
-            <p>Siempre presente, incluso en los días más difíciles.</p>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-box">
-            <h3>2026 • Gracias</h3>
-            <p>Gracias por todos los recuerdos y el amor incondicional.</p>
-          </div>
-        </div>
-
-      </div>
-
+    <!-- Gallery Grid -->
+    <div class="masonry-grid" id="masonry-grid"></div>
+    <div class="empty-gallery" id="empty-gallery" style="display:none;">
+      <div class="icon">🌿</div>
+      <p>Aún no hay fotos. Agrega los primeros recuerdos de Copito...</p>
     </div>
+  </div>
+</section>
 
-  </section>
+<!-- TIMELINE -->
+<section id="timeline">
+  <div class="section-header fade-in-section">
+    <p class="section-eyebrow">📅 historia</p>
+    <h2 class="section-title">Línea Temporal</h2>
+    <p class="section-subtitle">Un viaje a través de los años juntos</p>
+  </div>
 
-  <section id="galeria">
+  <div class="timeline-container">
+    <div class="timeline-line"></div>
+    <div id="timeline-content"></div>
+  </div>
+</section>
 
-    <div class="container">
+<!-- FAVORITAS -->
+<section id="favoritas">
+  <div class="section-header fade-in-section">
+    <p class="section-eyebrow">⭐ especiales</p>
+    <h2 class="section-title">Fotos Favoritas</h2>
+    <p class="section-subtitle">Los momentos marcados con amor</p>
+  </div>
+  <div class="favorites-grid" id="favorites-grid"></div>
+  <div class="empty-gallery" id="empty-fav" style="display:none;">
+    <div class="icon">⭐</div>
+    <p>Marca algunas fotos como favoritas para verlas aquí...</p>
+  </div>
+</section>
 
-      <h2 class="section-title">Galería Automática</h2>
+<!-- VIDEOS -->
+<section id="videos">
+  <div class="section-header fade-in-section">
+    <p class="section-eyebrow">🎬 momentos</p>
+    <h2 class="section-title">Videos</h2>
+    <p class="section-subtitle">Aquellos instantes que cobraron vida</p>
+  </div>
+  <div class="videos-placeholder fade-in-section">
+    <div class="icon">🎥</div>
+    <p>Agrega videos de Copito para revivir sus momentos más especiales</p>
+    <button class="btn-primary" onclick="document.getElementById('video-input').click()">+ Agregar video</button>
+    <input type="file" id="video-input" class="video-input" accept="video/*" multiple onchange="handleVideoUpload(this.files)">
+  </div>
+  <div id="videos-grid" style="max-width:900px;margin:2rem auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;"></div>
+</section>
 
-      <div class="section-subtitle">
-        Todas las imágenes se sincronizan automáticamente desde Google Photos y Google Drive.
-      </div>
+<!-- MENSAJES -->
+<section id="mensajes">
+  <div class="section-header fade-in-section">
+    <p class="section-eyebrow">💌 dedicatorias</p>
+    <h2 class="section-title">Mensajes &amp; Dedicatorias</h2>
+    <p class="section-subtitle">Palabras que viajan más allá</p>
+  </div>
 
-      <div class="gallery" id="gallery"></div>
+  <div class="messages-grid" id="messages-grid"></div>
 
+  <div class="message-form fade-in-section">
+    <h3>Dejar un mensaje</h3>
+    <div class="form-field">
+      <input type="text" id="msg-author" placeholder="Tu nombre" maxlength="60">
     </div>
-
-  </section>
-
-  <section id="ia">
-
-    <div class="container">
-
-      <div class="ai-section">
-
-        <h2 class="section-title">✨ IA Memories</h2>
-
-        <div class="section-subtitle">
-          La IA analiza las fotos y genera pequeños recuerdos,
-          agrupando momentos parecidos y detectando emociones.
-        </div>
-
-        <div class="ai-grid" id="aiGrid"></div>
-
-      </div>
-
+    <div class="form-field">
+      <textarea id="msg-text" rows="4" placeholder="Escribe tu mensaje para Copito..."></textarea>
     </div>
+    <button class="btn-primary" style="width:100%;" onclick="addMessage()">Guardar mensaje</button>
+  </div>
+</section>
 
-  </section>
+<!-- RECIENTES -->
+<section id="recientes">
+  <div class="section-header fade-in-section">
+    <p class="section-eyebrow">🕊 últimos momentos</p>
+    <h2 class="section-title">Recién Agregados</h2>
+    <p class="section-subtitle">Los recuerdos más nuevos</p>
+  </div>
+  <div class="masonry-grid" id="recent-grid"></div>
+  <div class="empty-gallery" id="empty-recent" style="display:none;">
+    <div class="icon">🌸</div>
+    <p>Los recuerdos que agregues aparecerán aquí primero...</p>
+  </div>
+</section>
 
-  <footer>
-    Hecho con amor para Copito 🤍🐾
-  </footer>
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">Copito</div>
+  <p>2006 <span class="footer-heart">♥</span> 9 de mayo de 2026</p>
+  <p style="margin-top:0.5rem;opacity:0.5;">Siempre en nuestro corazón</p>
+  <div class="footer-links">
+    <a href="#inicio">Inicio</a>
+    <a href="#recuerdos">Galería</a>
+    <a href="#timeline">Línea Temporal</a>
+    <a href="#mensajes">Mensajes</a>
+  </div>
+</footer>
 
-  <script>
+<!-- SLIDESHOW -->
+<div class="slideshow-overlay" id="slideshow">
+  <div class="slideshow-controls">
+    <button class="slideshow-btn" onclick="toggleSlideshowPause()" id="ss-pause-btn">⏸</button>
+    <button class="slideshow-btn" onclick="closeSlideshow()">✕</button>
+  </div>
+  <button class="slideshow-nav prev" onclick="slideshowPrev()">‹</button>
+  <div class="slideshow-img-wrap">
+    <img class="slideshow-img" id="ss-img" src="" alt="">
+  </div>
+  <button class="slideshow-nav next" onclick="slideshowNext()">›</button>
+  <div class="slideshow-caption" id="ss-caption"></div>
+  <div class="slideshow-progress" id="ss-progress"></div>
+</div>
 
-    // HUELLITAS
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <div class="lightbox-content" onclick="event.stopPropagation()">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <img id="lb-img" src="" alt="">
+    <div class="lightbox-info" id="lb-info"></div>
+  </div>
+</div>
 
-    const floatingPaws = document.getElementById('floatingPaws');
+<!-- MUSIC PLAYER -->
+<div class="music-player" id="music-player">
+  <button class="music-btn" id="music-btn" onclick="toggleMusic()">♪</button>
+  <span class="music-label">Música suave</span>
+</div>
 
-    for(let i = 0; i < 30; i++) {
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
 
-      const paw = document.createElement('div');
-      paw.classList.add('paw');
-      paw.innerHTML = '🐾';
+<script>
+/* ============================================================
+   MEMORIAL DIGITAL — COPITO
+   Código modular y comentado
+   ============================================================ */
 
-      paw.style.left = Math.random() * 100 + '%';
-      paw.style.animationDuration = (15 + Math.random() * 10) + 's';
-      paw.style.fontSize = (20 + Math.random() * 20) + 'px';
-      paw.style.animationDelay = Math.random() * 10 + 's';
+// ===== BASE DE DATOS =====
+/* ============================================================
+   COPITO MEMORIES — SISTEMA COMPLETO
+   ============================================================ */
 
-      floatingPaws.appendChild(paw);
+/* =========================
+   ESTADO GLOBAL
+========================= */
 
-    }
+/* ============================================================
+   COPITO MEMORIES — FULL JS
+   ============================================================ */
 
 
-    // FOTOS
-// CARGAR FOTOS DESDE photos.json
+/* ============================================================
+   VARIABLES GLOBALES
+   ============================================================ */
 
-async function loadPhotos() {
+let allPhotos = [];
+
+let currentFilter = 'todos';
+
+let currentPage = 1;
+
+const PHOTOS_PER_PAGE = 20;
+
+let searchQuery = '';
+
+let slideshowIndex = 0;
+
+let slideshowTimer = null;
+
+let slideshowPaused = false;
+
+let aiModel = null;
+
+let musicPlaying = false;
+
+let audioCtx = null;
+
+let gainNode = null;
+
+let oscillators = [];
+
+
+/* ============================================================
+   INIT
+   ============================================================ */
+
+async function init() {
+
+  initParticles();
+
+  initScrollAnimations();
+
+  initNavScroll();
+
+  showToast('✨ Cargando recuerdos de Copito...');
+
+  await loadAI();
+
+  await loadPhotos();
+
+  renderGallery();
+
+  loadVideos();
+
+  buildTimeline();
+
+  buildFavorites();
+
+  buildRecent();
+
+  buildYearFilters();
+
+  autoSetHeroPhoto();
+
+  generateDailyMemory();
+
+}
+
+
+/* ============================================================
+   IA
+   ============================================================ */
+
+async function loadAI() {
 
   try {
 
-    const response = await fetch('photos.json');
+    aiModel = await mobilenet.load();
 
-    const photos = await response.json();
-
-    renderMemories(photos);
-    renderGallery(photos);
+    console.log('IA cargada 🤍');
 
   } catch(error) {
 
-    console.error('Error cargando photos.json:', error);
+    console.error(error);
 
   }
 
 }
 
 
-// RECUERDOS DESTACADOS
+/* ============================================================
+   LOAD PHOTOS.JSON
+   ============================================================ */
 
-function renderMemories(photos) {
+async function loadPhotos() {
 
-  const memoryGrid = document.getElementById('memoryGrid');
+  try {
 
-  if(!memoryGrid) return;
+    const response =
+      await fetch('./photos.json');
 
-  memoryGrid.innerHTML = '';
+    const data =
+      await response.json();
 
-  photos.slice(0, 3).forEach(photo => {
+    allPhotos = data.map((photo, index) => {
 
-    const card = document.createElement('div');
+      return {
 
-    card.classList.add('memory-card');
+        id: index + 1,
 
-    card.innerHTML = `
-      <img src="${photo.url}" alt="${photo.name}">
+        src: photo.url,
 
-      <div class="memory-content">
-        <h3>${photo.title || photo.name}</h3>
-        <p>${photo.text || 'Recuerdo de Copito 🤍'}</p>
-      </div>
-    `;
+        type:
+          photo.type || 'image',
 
-    memoryGrid.appendChild(card);
+        name:
+          photo.name || 'Copito',
 
-  });
+        date:
+          photo.date ||
+          new Date().toISOString(),
 
-}
+        addedAt:
+          photo.date ||
+          new Date().toISOString(),
 
+        desc:
+          generateRandomMemory(),
 
-// GALERÍA COMPLETA
+        tags: ['copito'],
 
-function renderGallery(photos) {
+        favorite:
+          Math.random() > 0.8
 
-  const gallery = document.getElementById('gallery');
-
-  if(!gallery) return;
-
-  gallery.innerHTML = '';
-
-  photos.forEach(photo => {
-
-    const div = document.createElement('div');
-
-    div.classList.add('photo');
-
-    div.innerHTML = `
-      <img src="${photo.url}" alt="${photo.name}">
-    `;
-
-    gallery.appendChild(div);
-
-  });
-
-}
-
-
-// INICIAR
-
-loadPhotos();
-
-    const aiMemories = [
-      '🤍 La mayoría de fotos muestran momentos tranquilos junto a la familia.',
-      '🐾 Copito aparece muchas veces descansando cerca de las personas que quería.',
-      '🌤️ La IA detectó recuerdos felices y ambientes cálidos en casi todas las imágenes.',
-      '✨ Muchas fotos muestran miradas relajadas y confianza, reflejando cuánto amor recibió.',
-      '🏡 Los recuerdos más frecuentes ocurren dentro de casa y durante paseos tranquilos.',
-      '📸 El sistema detectó que Copito siempre estaba cerca de quienes más quería.'
-    ];
-
-    const aiGrid = document.getElementById('aiGrid');
-
-    aiMemories.forEach(text => {
-
-      const div = document.createElement('div');
-      div.classList.add('ai-card');
-      div.innerHTML = text;
-
-      aiGrid.appendChild(div);
+      };
 
     });
 
+    console.log('Fotos y videos cargados 🤍');
 
-    // FUTURO
-    // fetch('photos.json')
-    // OpenAI API
-    // ordenar automáticamente por fecha
-    // reconocer momentos similares
-    // detectar personas
-    // crear timeline automática
-    // slideshow automático
+  } catch(error) {
 
-  </script>
+    console.error(
+      'Error cargando photos.json:',
+      error
+    );
 
+  }
+
+}
+function generateRandomMemory() {
+
+  const memories = [
+
+    'Un recuerdo hermoso de Copito 🤍',
+
+    'Un momento especial lleno de amor 🐶',
+
+    'Copito disfrutando un día feliz 🌿',
+
+    'Un instante inolvidable junto a Copito ☀',
+
+    'Los recuerdos nunca se van 🤍',
+
+    'Un día lleno de alegría y cariño ✨',
+
+    'Copito siempre vivirá en nuestros corazones 🤍'
+
+  ];
+
+  return memories[
+    Math.floor(
+      Math.random() * memories.length
+    )
+  ];
+
+}
+
+/* ============================================================
+   IA ANALYSIS
+   ============================================================ */
+
+async function analyzePhoto(photo) {
+
+  return new Promise(resolve => {
+
+    const img = new Image();
+
+    img.crossOrigin = 'anonymous';
+
+    img.src = photo.src;
+
+    img.onload = async () => {
+
+      try {
+
+        const predictions =
+          await aiModel.classify(img);
+
+        photo.aiAnalysis =
+          predictions;
+
+        photo.desc =
+          generateSmartMemory(photo);
+
+        photo.tags =
+          generateAITags(photo);
+
+      } catch(error) {
+
+        photo.desc =
+          'Un hermoso recuerdo de Copito 🤍';
+
+      }
+
+      resolve();
+
+    };
+
+  });
+
+}
+
+
+/* ============================================================
+   IA MEMORY TEXT
+   ============================================================ */
+
+function generateSmartMemory(photo) {
+
+  if(!photo.aiAnalysis.length) {
+
+    return 'Un hermoso recuerdo 🤍';
+
+  }
+
+  const top =
+    photo.aiAnalysis[0]
+      .className
+      .toLowerCase();
+
+  if(top.includes('dog')) {
+
+    return 'Copito disfrutando un momento feliz 🐶';
+
+  }
+
+  if(top.includes('grass')) {
+
+    return 'Un paseo especial junto a Copito 🌿';
+
+  }
+
+  if(top.includes('park')) {
+
+    return 'Un día inolvidable al aire libre ☀';
+
+  }
+
+  if(top.includes('blanket')) {
+
+    return 'Copito descansando tranquilo 🤍';
+
+  }
+
+  return 'Un instante inolvidable 🤍';
+
+}
+
+
+/* ============================================================
+   IA TAGS
+   ============================================================ */
+
+function generateAITags(photo) {
+
+  const tags = [];
+
+  if(!photo.aiAnalysis.length) {
+
+    return ['copito'];
+
+  }
+
+  photo.aiAnalysis.forEach(pred => {
+
+    tags.push(
+      pred.className.toLowerCase()
+    );
+
+  });
+
+  tags.push('copito');
+
+  return tags;
+
+}
+
+
+/* ============================================================
+   HERO PHOTO
+   ============================================================ */
+
+function autoSetHeroPhoto() {
+
+  const images =
+    allPhotos.filter(
+      p => p.type === 'image'
+    );
+
+  if(!images.length) return;
+
+  const random =
+    images[
+      Math.floor(
+        Math.random() * images.length
+      )
+    ];
+
+  setHeroPhotoSrc(random.src);
+
+}
+
+
+function setHeroPhotoSrc(src) {
+
+  const img =
+    document.getElementById('hero-img');
+
+  const placeholder =
+    document.getElementById('hero-placeholder');
+
+  img.src = src;
+
+  img.style.display = 'block';
+
+  placeholder.style.display = 'none';
+
+}
+
+
+/* ============================================================
+   DAILY MEMORY
+   ============================================================ */
+
+function generateDailyMemory() {
+
+  const images =
+    allPhotos.filter(
+      p => p.type === 'image'
+    );
+
+  if(!images.length) return;
+
+  const random =
+    images[
+      Math.floor(
+        Math.random() * images.length
+      )
+    ];
+
+  setTimeout(() => {
+
+    showToast(
+      `✨ Hace ${yearsAgo(random.date)} años: ${random.desc}`
+    );
+
+  }, 3000);
+
+}
+
+
+/* ============================================================
+   GALLERY
+   ============================================================ */
+
+function renderGallery() {
+
+  const grid =
+    document.getElementById(
+      'masonry-grid'
+    );
+
+  const empty =
+    document.getElementById(
+      'empty-gallery'
+    );
+
+  const filtered =
+    filterPhotos().filter(
+      p => p.type === 'image'
+    );
+
+    const totalPages =
+  Math.ceil(
+    filtered.length /
+    PHOTOS_PER_PAGE
+  );
+
+  const start =
+    (currentPage - 1) *
+    PHOTOS_PER_PAGE;
+
+  const end =
+    start + PHOTOS_PER_PAGE;
+
+  const paginatedPhotos =
+    filtered.slice(start, end);
+
+  if(!filtered.length) {
+
+    grid.innerHTML = '';
+
+    empty.style.display = 'block';
+
+    return;
+
+  }
+
+  empty.style.display = 'none';
+
+  grid.innerHTML =
+    paginatedPhotos.map((photo, idx) => {
+
+      const isFeatured =
+        photo.favorite ||
+        idx % 7 === 0;
+
+      return `
+
+      <div
+        class="masonry-item ${isFeatured ? 'featured' : ''}"
+      >
+
+        <button
+          class="masonry-fav ${photo.favorite ? 'active' : ''}"
+          onclick="toggleFavorite(${photo.id}, event)"
+        >
+
+          ${photo.favorite ? '⭐' : '☆'}
+
+        </button>
+
+        <img
+          src="${photo.src}"
+          alt="${photo.name}"
+          loading="lazy"
+          onclick="openLightbox(${photo.id})"
+        >
+
+        <div class="masonry-overlay">
+
+          <div class="masonry-info">
+
+            <span class="photo-date">
+
+              ${formatDate(photo.date)}
+
+            </span>
+
+            <span class="photo-desc">
+
+              ${photo.desc}
+
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      `;
+
+    }).join('');
+    renderPagination(totalPages);
+}
+
+function renderPagination(totalPages) {
+
+  let pagination =
+    document.getElementById(
+      'pagination'
+    );
+
+  if(!pagination) {
+
+    pagination =
+      document.createElement('div');
+
+    pagination.id = 'pagination';
+
+    pagination.style.cssText = `
+      display:flex;
+      justify-content:center;
+      gap:0.5rem;
+      margin-top:3rem;
+      flex-wrap:wrap;
+    `;
+
+    document
+      .getElementById('recuerdos')
+      .appendChild(pagination);
+
+  }
+
+  pagination.innerHTML = '';
+
+  for(
+    let i = 1;
+    i <= totalPages;
+    i++
+  ) {
+
+    const btn =
+      document.createElement('button');
+
+    btn.textContent = i;
+
+    btn.style.cssText = `
+      width:42px;
+      height:42px;
+      border:none;
+      border-radius:12px;
+      cursor:pointer;
+      background:${
+        i === currentPage
+          ? '#6b4e35'
+          : '#efe8dc'
+      };
+      color:${
+        i === currentPage
+          ? 'white'
+          : '#6b4e35'
+      };
+      font-size:0.9rem;
+      transition:0.3s;
+    `;
+
+    btn.onclick = () => {
+
+      currentPage = i;
+
+      renderGallery();
+
+      window.scrollTo({
+
+        top:
+          document
+            .getElementById('recuerdos')
+            .offsetTop - 100,
+
+        behavior:'smooth'
+
+      });
+
+    };
+
+    pagination.appendChild(btn);
+
+  }
+
+}
+
+
+/* ============================================================
+   VIDEOS
+   ============================================================ */
+
+function loadVideos() {
+
+  const grid =
+    document.getElementById(
+      'videos-grid'
+    );
+
+  const videos =
+    allPhotos.filter(
+      p => p.type === 'video'
+    );
+
+  if(!videos.length) {
+
+    grid.innerHTML = `
+
+      <p style="
+        text-align:center;
+        color:#999;
+      ">
+
+        No hay videos 🤍
+
+      </p>
+
+    `;
+
+    return;
+
+  }
+
+  grid.innerHTML =
+    videos.map(video => `
+
+      <div style="
+        background:white;
+        border-radius:18px;
+        overflow:hidden;
+        box-shadow:0 2px 20px rgba(0,0,0,0.08);
+      ">
+
+        <iframe
+          src="${video.src}"
+          width="100%"
+          height="320"
+          allow="autoplay"
+          allowfullscreen
+          style="
+            border:none;
+            display:block;
+          "
+        ></iframe>
+
+        <div style="
+          padding:1rem;
+          color:#777;
+          font-size:0.85rem;
+        ">
+
+          ${video.name}
+
+        </div>
+
+      </div>
+
+    `).join('');
+
+}
+
+
+/* ============================================================
+   FILTERS
+   ============================================================ */
+
+function filterPhotos() {
+
+  let photos = [...allPhotos];
+
+  if(currentFilter === 'favoritas') {
+
+    photos =
+      photos.filter(
+        p => p.favorite
+      );
+
+  }
+
+  if(currentFilter.startsWith('year-')) {
+
+    const y =
+      currentFilter.replace(
+        'year-',
+        ''
+      );
+
+    photos =
+      photos.filter(
+        p =>
+          new Date(p.date)
+            .getFullYear() == y
+      );
+
+  }
+
+  if(searchQuery.trim()) {
+
+    const q =
+      searchQuery.toLowerCase();
+
+    photos =
+      photos.filter(p =>
+
+        p.desc
+          .toLowerCase()
+          .includes(q)
+
+        ||
+
+        p.tags.some(t =>
+          t.includes(q)
+        )
+
+      );
+
+  }
+
+  return photos;
+
+}
+
+
+function filterGallery() {
+
+  searchQuery =
+    document.getElementById(
+      'search-input'
+    ).value;
+
+  renderGallery();
+  currentPage = 1;
+
+}
+
+
+function setFilter(filter, el) {
+
+  currentFilter = filter;
+
+  document
+    .querySelectorAll('.filter-pill')
+    .forEach(p =>
+      p.classList.remove('active')
+    );
+
+  el.classList.add('active');
+
+  renderGallery();
+  currentPage = 1;
+}
+
+
+/* ============================================================
+   YEAR FILTERS
+   ============================================================ */
+
+function buildYearFilters() {
+
+  const years = [
+
+    ...new Set(
+
+      allPhotos.map(p =>
+
+        new Date(p.date)
+          .getFullYear()
+
+      )
+
+    )
+
+  ].sort().reverse();
+
+  const pills =
+    document.getElementById(
+      'filter-pills'
+    );
+
+  document
+    .querySelectorAll('.year-pill')
+    .forEach(el =>
+      el.remove()
+    );
+
+  years.forEach(y => {
+
+    const btn =
+      document.createElement(
+        'button'
+      );
+
+    btn.className =
+      'filter-pill year-pill';
+
+    btn.textContent = y;
+
+    btn.onclick =
+      function() {
+
+        setFilter(
+          'year-' + y,
+          this
+        );
+
+      };
+
+    pills.appendChild(btn);
+
+  });
+
+}
+
+
+/* ============================================================
+   FAVORITES
+   ============================================================ */
+
+function toggleFavorite(id, e) {
+
+  e.stopPropagation();
+
+  const photo =
+    allPhotos.find(
+      p => p.id === id
+    );
+
+  if(!photo) return;
+
+  photo.favorite =
+    !photo.favorite;
+
+  renderGallery();
+
+  buildFavorites();
+
+}
+
+
+function buildFavorites() {
+
+  const grid =
+    document.getElementById(
+      'favorites-grid'
+    );
+
+  const empty =
+    document.getElementById(
+      'empty-fav'
+    );
+
+  const favs =
+    allPhotos.filter(
+      p => p.favorite
+    );
+
+  if(!favs.length) {
+
+    grid.innerHTML = '';
+
+    empty.style.display = 'block';
+
+    return;
+
+  }
+
+  empty.style.display = 'none';
+
+  grid.innerHTML =
+    favs.map(p => `
+
+      <div
+        class="fav-card"
+        onclick="openLightbox(${p.id})"
+      >
+
+        <img src="${p.src}">
+
+        <div class="fav-card-body">
+
+          <span class="fav-badge">
+            ⭐ Favorita
+          </span>
+
+          <div>
+            ${formatDate(p.date)}
+          </div>
+
+        </div>
+
+      </div>
+
+    `).join('');
+
+}
+
+
+/* ============================================================
+   RECENT
+   ============================================================ */
+
+function buildRecent() {
+
+  const recent =
+    [...allPhotos]
+      .filter(
+        p => p.type === 'image'
+      )
+      .slice(0, 8);
+
+  const grid =
+    document.getElementById(
+      'recent-grid'
+    );
+
+  const empty =
+    document.getElementById(
+      'empty-recent'
+    );
+
+  if(!recent.length) {
+
+    grid.innerHTML = '';
+
+    empty.style.display = 'block';
+
+    return;
+
+  }
+
+  empty.style.display = 'none';
+
+  grid.innerHTML =
+    recent.map(p => `
+
+      <div
+        class="masonry-item"
+        onclick="openLightbox(${p.id})"
+      >
+
+        <img src="${p.src}">
+
+        <div class="masonry-overlay">
+
+          <div class="masonry-info">
+
+            <span class="photo-date">
+              ${formatDate(p.date)}
+            </span>
+
+            <span class="photo-desc">
+              Hace ${yearsAgo(p.date)} años 🤍
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    `).join('');
+
+}
+
+
+/* ============================================================
+   TIMELINE
+   ============================================================ */
+
+function buildTimeline() {
+
+  const container =
+    document.getElementById(
+      'timeline-content'
+    );
+
+  const grouped = {};
+
+  allPhotos
+    .filter(
+      p => p.type === 'image'
+    )
+    .forEach(photo => {
+
+      const year =
+        new Date(photo.date)
+          .getFullYear();
+
+      if(!grouped[year]) {
+
+        grouped[year] = [];
+
+      }
+
+      grouped[year].push(photo);
+
+    });
+
+  const years =
+    Object.keys(grouped)
+      .sort()
+      .reverse();
+
+  container.innerHTML =
+    years.map(year => `
+
+      <div class="timeline-group">
+
+        <div class="timeline-year-badge">
+          <span>${year}</span>
+        </div>
+
+        ${grouped[year]
+          .slice(0,4)
+          .map(photo => `
+
+            <div class="timeline-item visible">
+
+              <div class="timeline-dot"></div>
+
+              <div class="timeline-card">
+
+                <img src="${photo.src}">
+
+                <div class="timeline-card-body">
+
+                  <div class="timeline-card-date">
+                    ${formatDate(photo.date)}
+                  </div>
+
+                  <div class="timeline-card-desc">
+                    ${photo.desc}
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+        `).join('')}
+
+      </div>
+
+  `).join('');
+
+}
+
+
+/* ============================================================
+   LIGHTBOX
+   ============================================================ */
+
+function openLightbox(id) {
+
+  const photo =
+    allPhotos.find(
+      p => p.id === id
+    );
+
+  if(!photo) return;
+
+  document
+    .getElementById('lb-img')
+    .src = photo.src;
+
+  document
+    .getElementById('lb-info')
+    .textContent =
+      photo.desc;
+
+  document
+    .getElementById('lightbox')
+    .classList.add('active');
+
+}
+
+
+function closeLightbox() {
+
+  document
+    .getElementById('lightbox')
+    .classList.remove('active');
+
+}
+
+
+/* ============================================================
+   SLIDESHOW
+   ============================================================ */
+
+function startSlideshow() {
+
+  const images =
+    allPhotos.filter(
+      p => p.type === 'image'
+    );
+
+  if(!images.length) return;
+
+  const overlay =
+    document.getElementById(
+      'slideshow'
+    );
+
+  overlay.classList.add('active');
+
+  slideshowIndex = 0;
+
+  slideshowPaused = false;
+
+  showSlide(images);
+
+  slideshowTimer =
+    setInterval(() => {
+
+      if(!slideshowPaused) {
+
+        slideshowIndex =
+          (slideshowIndex + 1)
+          % images.length;
+
+        showSlide(images);
+
+      }
+
+    }, 4500);
+
+}
+
+
+function showSlide(images) {
+
+  const img =
+    document.getElementById(
+      'ss-img'
+    );
+
+  const caption =
+    document.getElementById(
+      'ss-caption'
+    );
+
+  const photo =
+    images[slideshowIndex];
+
+  img.classList.remove('visible');
+
+  setTimeout(() => {
+
+    img.src = photo.src;
+
+    img.onload = () =>
+      img.classList.add('visible');
+
+    caption.textContent =
+      photo.desc;
+
+  }, 300);
+
+}
+
+
+function slideshowNext() {
+
+  slideshowIndex++;
+
+}
+
+
+function slideshowPrev() {
+
+  slideshowIndex--;
+
+}
+
+
+function toggleSlideshowPause() {
+
+  slideshowPaused =
+    !slideshowPaused;
+
+  document
+    .getElementById(
+      'ss-pause-btn'
+    )
+    .textContent =
+      slideshowPaused
+        ? '▶'
+        : '⏸';
+
+}
+
+
+function closeSlideshow() {
+
+  clearInterval(slideshowTimer);
+
+  document
+    .getElementById(
+      'slideshow'
+    )
+    .classList.remove('active');
+
+}
+
+
+/* ============================================================
+   MUSIC
+   ============================================================ */
+
+function toggleMusic() {
+
+  if(musicPlaying) {
+
+    stopMusic();
+
+  } else {
+
+    startMusic();
+
+  }
+
+}
+
+
+function startMusic() {
+
+  audioCtx =
+    new (
+      window.AudioContext ||
+      window.webkitAudioContext
+    )();
+
+  gainNode =
+    audioCtx.createGain();
+
+  gainNode.gain.value = 0.03;
+
+  gainNode.connect(
+    audioCtx.destination
+  );
+
+  const osc =
+    audioCtx.createOscillator();
+
+  osc.type = 'sine';
+
+  osc.frequency.value = 220;
+
+  osc.connect(gainNode);
+
+  osc.start();
+
+  oscillators.push(osc);
+
+  musicPlaying = true;
+
+  document
+    .getElementById('music-btn')
+    .textContent = '♬';
+
+}
+
+
+function stopMusic() {
+
+  oscillators.forEach(o => o.stop());
+
+  oscillators = [];
+
+  if(audioCtx) {
+
+    audioCtx.close();
+
+  }
+
+  musicPlaying = false;
+
+  document
+    .getElementById('music-btn')
+    .textContent = '♪';
+
+}
+
+
+/* ============================================================
+   TOAST
+   ============================================================ */
+
+function showToast(msg) {
+
+  const toast =
+    document.getElementById('toast');
+
+  toast.textContent = msg;
+
+  toast.classList.add('show');
+
+  setTimeout(() => {
+
+    toast.classList.remove('show');
+
+  }, 3000);
+
+}
+
+
+/* ============================================================
+   HELPERS
+   ============================================================ */
+
+function formatDate(dateStr) {
+
+  return new Date(dateStr)
+    .toLocaleDateString(
+      'es-ES',
+      {
+
+        year: 'numeric',
+
+        month: 'long',
+
+        day: 'numeric'
+
+      }
+    );
+
+}
+
+
+function yearsAgo(date) {
+
+  return (
+    new Date().getFullYear()
+    -
+    new Date(date).getFullYear()
+  );
+
+}
+
+
+/* ============================================================
+   PARTICLES
+   ============================================================ */
+
+function initParticles() {
+
+  const canvas =
+    document.getElementById(
+      'particles-canvas'
+    );
+
+  const ctx =
+    canvas.getContext('2d');
+
+  let W, H;
+
+  const particles = [];
+
+  function resize() {
+
+    W = canvas.width =
+      window.innerWidth;
+
+    H = canvas.height =
+      window.innerHeight;
+
+  }
+
+  resize();
+
+  window.addEventListener(
+    'resize',
+    resize
+  );
+
+  for(let i = 0; i < 55; i++) {
+
+    particles.push({
+
+      x: Math.random() * W,
+
+      y: Math.random() * H,
+
+      r: Math.random() * 2,
+
+      vx:
+        (Math.random() - 0.5)
+        * 0.3,
+
+      vy:
+        (Math.random() - 0.5)
+        * 0.3
+
+    });
+
+  }
+
+  function animate() {
+
+    ctx.clearRect(0,0,W,H);
+
+    particles.forEach(p => {
+
+      ctx.beginPath();
+
+      ctx.arc(
+        p.x,
+        p.y,
+        p.r,
+        0,
+        Math.PI * 2
+      );
+
+      ctx.fillStyle =
+        'rgba(201,169,110,0.25)';
+
+      ctx.fill();
+
+      p.x += p.vx;
+
+      p.y += p.vy;
+
+      if(p.x < 0) p.x = W;
+
+      if(p.x > W) p.x = 0;
+
+      if(p.y < 0) p.y = H;
+
+      if(p.y > H) p.y = 0;
+
+    });
+
+    requestAnimationFrame(
+      animate
+    );
+
+  }
+
+  animate();
+
+}
+
+
+/* ============================================================
+   SCROLL
+   ============================================================ */
+
+function initScrollAnimations() {
+
+  const observer =
+    new IntersectionObserver(entries => {
+
+      entries.forEach(entry => {
+
+        if(entry.isIntersecting) {
+
+          entry.target
+            .classList
+            .add('visible');
+
+        }
+
+      });
+
+    });
+
+  document
+    .querySelectorAll(
+      '.fade-in-section'
+    )
+    .forEach(el =>
+      observer.observe(el)
+    );
+
+}
+
+
+function initNavScroll() {
+
+  const nav =
+    document.getElementById(
+      'main-nav'
+    );
+
+  window.addEventListener(
+    'scroll',
+    () => {
+
+      nav.style.boxShadow =
+        window.scrollY > 50
+          ? '0 2px 20px rgba(0,0,0,0.08)'
+          : 'none';
+
+    }
+  );
+
+}
+
+
+/* ============================================================
+   MENU
+   ============================================================ */
+
+function toggleMenu() {
+
+  document
+    .getElementById('nav-links')
+    .classList.toggle('open');
+
+}
+
+
+function closeMenu() {
+
+  document
+    .getElementById('nav-links')
+    .classList.remove('open');
+
+}
+
+
+/* ============================================================
+   KEYBOARD
+   ============================================================ */
+
+document.addEventListener(
+  'keydown',
+  e => {
+
+    if(e.key === 'Escape') {
+
+      closeLightbox();
+
+      closeSlideshow();
+
+    }
+
+  }
+);
+
+
+/* ============================================================
+   START
+   ============================================================ */
+
+document.addEventListener(
+  'DOMContentLoaded',
+  init
+);
+</script>
 </body>
 </html>
